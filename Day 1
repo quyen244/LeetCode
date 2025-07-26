@@ -1,0 +1,29 @@
+# 🏃‍♂️ LeetCode 55. Jump Game
+
+## 🔍 Problem Description
+
+You are given an integer array `nums`.  
+You are initially positioned at the **first index**, and each element in the array represents your **maximum jump length** at that position.
+
+Return `True` if you can reach the **last index**, or `False` otherwise.
+
+### Example:
+```python
+Input: nums = [2, 3, 1, 1, 4]
+Output: True
+
+## Idea :
+To reach the last position, we must arrive from some earlier index that has enough jump power.
+We work backward from the end of the array, tracking the nearest reachable destination.
+## Code :
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        destination = len(nums) - 1  
+
+        for i in range(len(nums) - 2, -1, -1):
+            # Check if current index can jump to or beyond the destination
+            if i + nums[i] >= destination:
+                destination = i  # Update destination
+
+        return destination == 0
+
